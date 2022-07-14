@@ -1,41 +1,42 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { LoginCredentials } from 'src/app/model/LoginCredentials';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { LoginCredentials } from "src/app/model/LoginCredentials";
 
 const httpOptions1 = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Credentials': 'true',
-    'Access-Control-Allow-Headers': '',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Headers": "",
   }),
 };
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class LoginService {
   loggedIn: boolean;
-  baseUrl = 'http://localhost:8080/api/v1.0/tweets';
+  baseUrl =
+    "http://tweetapp-env.eba-wscbspw4.us-east-1.elasticbeanstalk.com/api/v1.0/tweets";
   constructor(private http: HttpClient) {}
 
   public checkUserCredentials(
     loginCredentials: LoginCredentials
   ): Observable<any> {
     return this.http
-      .post(this.baseUrl + '/login', loginCredentials, httpOptions1)
+      .post(this.baseUrl + "/login", loginCredentials, httpOptions1)
       .pipe();
   }
 
   public storeUserData(username: string, firstName: string, token: string) {
-    localStorage.setItem('loginId', username);
-    localStorage.setItem('firstName', firstName);
-    localStorage.setItem('token', token);
+    localStorage.setItem("loginId", username);
+    localStorage.setItem("firstName", firstName);
+    localStorage.setItem("token", token);
   }
 
   public isLoggedIn() {
-    if (localStorage.getItem('loginId')) return (this.loggedIn = true);
+    if (localStorage.getItem("loginId")) return (this.loggedIn = true);
     return (this.loggedIn = false);
   }
 
@@ -46,7 +47,7 @@ export class LoginService {
 
   public register(userInfo: any): Observable<any> {
     return this.http
-      .post(this.baseUrl + '/register', userInfo, httpOptions1)
+      .post(this.baseUrl + "/register", userInfo, httpOptions1)
       .pipe();
   }
 
