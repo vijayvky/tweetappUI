@@ -1,0 +1,276 @@
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="mobile-web-app-capable" content="yes" />
+<div class="row">
+  <div class="column1" style="align-items: center">
+    <div style="flex: 700%; margin: 50px">
+      <app-nav-bar class="stickySidebar"></app-nav-bar>
+    </div>
+  </div>
+
+  <div class="column2" style="align-content: center">
+    <div class="vl">
+      <div style="margin-top: 3%" id="scroll">
+        <div id="page" style="margin-top: 2%">
+          <div id="tweet" style="margin-top: 10%">
+            <div class="tweet-container">
+              <div class="user pr" style="background-color: aquamarine">
+                <img
+                  class="avatar"
+                  *ngIf="user?.imageUrl == null"
+                  src="assets/images/user_icon.png"
+                />
+                <img
+                  class="avatar"
+                  *ngIf="user?.imageUrl != null"
+                  src="{{ user?.imageUrl }}"
+                />
+                <div class="username">
+                  <div class="name">{{ user?.loginId }}</div>
+                  <div class="handle">
+                    @{{ user?.firstName + "_" + user?.lastName }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-left: 75%; margin-top: 5%" id="main-container">
+            <button
+              class="btn btn-outline-primary"
+              style="
+                border-radius: 5px;
+                padding: 5px;
+                font-size: 100%;
+                margin-left: 18%;
+              "
+              (click)="onOpenModal()"
+            >
+              Add Tweet
+            </button>
+          </div>
+
+          <div
+            class="modal fade"
+            id="addTweetModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="addEmployeeModalLabel"
+            aria-hidden="true"
+            style="margin-top: 20%; margin-left: 35%; padding: auto"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div style="margin-left: 5%; margin-top: 2%">
+                    <a
+                      type="button"
+                      id="add-employee-form"
+                      class="btn"
+                      data-dismiss="modal"
+                    >
+                      <i style="font-size: 20px" class="fa">&#x2715;</i>
+                    </a>
+                  </div>
+                  <div style="margin: 10%">
+                    <textarea
+                      rows="5"
+                      cols="50"
+                      type="text"
+                      class="form-control"
+                      name="tweetText"
+                      [(ngModel)]="tweetText"
+                      placeholder="Enter your tweet"
+                      maxlength="144"
+                    ></textarea>
+                    <div style="margin-left: 75%; margin-top: 10%">
+                      <button
+                        style="
+                          border-radius: 50px;
+
+                          padding: 5px 15px 5px 15px;
+                          font-size: 100%;
+                        "
+                        type="submit"
+                        id="add-employee-form"
+                        class="btn btn-outline-primary"
+                        data-dismiss="modal"
+                        [disabled]="tweetText === ''"
+                        (click)="addTweet()"
+                      >
+                        Tweet
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="solid" style="margin-left: 20%" />
+        <div
+          *ngIf="lastTweet?.length == 0"
+          style="margin-top: 25%; text-align: center"
+        >
+          <span>No Tweets yet, add your first tweet to see</span>
+        </div>
+        <div *ngFor="let tweet of lastTweet.slice().reverse()">
+          <hr class="solid" style="margin-left: 20%" />
+          <div id="page">
+            <div id="tweet">
+              <div class="tweet-container">
+                <div class="user">
+                  <img
+                    class="avatar"
+                    *ngIf="!tweet?.imageUrl"
+                    src="assets/images/user_icon.png"
+                  />
+                  <img
+                    class="avatar"
+                    *ngIf="tweet?.imageUrl"
+                    src="{{ tweet?.imageUrl }}"
+                  />
+
+                  <div class="username">
+                    <div class="name">{{ tweet.username }}</div>
+                    <div class="handle">
+                      @{{ tweet.firstName + "_" + tweet.lastName }}
+                    </div>
+                  </div>
+
+                  <div class="date pt pb" style="font-size: 12px">
+                    {{ tweet.tweetDate | date: "medium" }}
+                  </div>
+                </div>
+                <div
+                  class="tweet-content pt"
+                  style="font-family: Helvetica; font-size: 20px"
+                >
+                  <p>{{ tweet.tweetText }}</p>
+                </div>
+              </div>
+              <div class="icons">
+                <div class="ico">
+                  <div
+                    (click)="likeTweet(tweet.tweetId)"
+                    class="fa fa-heart number"
+                    style="font-size: 20px"
+                  >
+                    {{ tweet.likes.length }}
+                  </div>
+                </div>
+                <div class="ico">
+                  <div style="margin-left: 25%" id="main-container">
+                    <a
+                      (click)="onOpenCommentModal(tweet.tweetId)"
+                      class="btn far fa-comment number"
+                      style="font-size: 20px"
+                    >
+                      {{ tweet.comments.length }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="wrap pt">
+              <div class="box">
+                <div *ngIf="tweet.comments.length > 0">
+                  <div class="content" *ngFor="let comment of tweet.comments">
+                    <div class="line">
+                      <div class="border"></div>
+                      <img
+                        class="avatar"
+                        *ngIf="!comment?.imageUrl"
+                        src="assets/images/user_icon.png"
+                      />
+                      <img
+                        class="avatar"
+                        *ngIf="comment?.imageUrl"
+                        src="{{ comment?.imageUrl }}"
+                      />
+                    </div>
+                    <div class="info" style="padding-left: 8%">
+                      <div class="userinfo sl">
+                        <div class="name">{{ comment.username }}</div>
+                      </div>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="replyto sl" style="padding-left: 10%">
+                      Replying to <a>{{ tweet.username }}</a>
+                    </div>
+                    <div class="subtweet-content sl">
+                      {{ comment.comment }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="modal fade"
+                id="addCommentModal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="addEmployeeModalLabel"
+                aria-hidden="true"
+                style="margin-top: 20%; margin-left: 35%; padding: auto"
+              >
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                      <div style="margin-left: 5%; margin-top: 2%">
+                        <a
+                          type="button"
+                          id="add-employee-form"
+                          class="btn"
+                          data-dismiss="modal"
+                        >
+                          <i
+                            style="font-size: 20px; padding-left: 50%"
+                            class="fa"
+                            >&#x2715;</i
+                          >
+                        </a>
+                      </div>
+                      <div style="margin: 10%">
+                        <textarea
+                          rows="5"
+                          cols="50"
+                          type="text"
+                          class="form-control"
+                          name="comment"
+                          [(ngModel)]="comment"
+                          placeholder="Tweet your reply"
+                          required
+                        ></textarea>
+                        <div style="margin-left: 75%; margin-top: 10%">
+                          <button
+                            style="
+                              border-radius: 50px;
+                              padding: 5px 15px 5px 15px;
+                              font-size: 100%;
+                            "
+                            type="submit"
+                            id="add-employee-form"
+                            class="btn btn-outline-primary"
+                            data-dismiss="modal"
+                            [disabled]="comment === ''"
+                            (click)="reply()"
+                          >
+                            Reply
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="column3">
+    <app-home></app-home>
+  </div>
+</div>

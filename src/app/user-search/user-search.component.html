@@ -1,0 +1,128 @@
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="mobile-web-app-capable" content="yes" />
+
+<div class="row">
+  <div class="column1" style="align-items: center">
+    <div style="flex: 700%; margin: 50px">
+      <app-nav-bar class="stickySidebar"></app-nav-bar>
+    </div>
+  </div>
+
+  <div class="column2">
+    <div class="vl">
+      <div style="margin-top: 3%" id="scroll">
+        <div id="page" style="margin-top: 2%">
+          <div id="tweet" style="margin-top: 10%">
+            <div class="tweet-container">
+              <div class="user pr">
+                <img
+                  class="avatar"
+                  *ngIf="user?.imageUrl == null"
+                  src="assets/images/user_icon.png"
+                />
+                <img
+                  class="avatar"
+                  *ngIf="user?.imageUrl != null"
+                  src="{{ user?.imageUrl }}"
+                />
+                <div class="username">
+                  <div class="name">{{ user?.loginId }}</div>
+                  <div class="handle">
+                    @{{ user?.firstName + "_" + user?.lastName }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="solid" style="margin-left: 20%" />
+        <div *ngFor="let tweet of othersTweets">
+          <hr class="solid" style="margin-left: 20%" />
+          <div id="page">
+            <div id="tweet">
+              <div class="tweet-container">
+                <div class="user">
+                  <img
+                    class="avatar"
+                    *ngIf="!tweet?.imageUrl"
+                    src="assets/images/user_icon.png"
+                  />
+                  <img
+                    class="avatar"
+                    *ngIf="tweet?.imageUrl"
+                    src="{{ tweet?.imageUrl }}"
+                  />
+                  <div class="username">
+                    <div class="name">{{ tweet.username }}</div>
+                    <div class="handle">@{{ tweet.username }}</div>
+                  </div>
+                  <div class="date pt pb">
+                    {{ tweet.tweetDate | date: "medium" }}
+                  </div>
+                  <i class="material-icons">keyboard_arrow_down</i>
+                </div>
+                <div class="tweet-content pt">
+                  {{ tweet.tweetText }}
+                </div>
+              </div>
+              <div class="icons">
+                <div class="ico">
+                  <div
+                    (click)="likeTweet(tweet.tweetId)"
+                    class="fa fa-heart number"
+                    style="font-size: 20px"
+                  >
+                    {{ tweet.likesCount }}
+                  </div>
+                </div>
+                <div class="ico">
+                  <div class="far fa-comment number" style="font-size: 20px">
+                    {{ tweet.commentsCount }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wrap pt">
+              <div class="box">
+                <div *ngIf="tweet.comments.length > 0">
+                  <div class="content" *ngFor="let comment of tweet.comments">
+                    <div class="line">
+                      <div class="border"></div>
+                      <img
+                        class="avatar"
+                        *ngIf="!comment?.imageUrl"
+                        src="assets/images/user_icon.png"
+                      />
+                      <img
+                        class="avatar"
+                        *ngIf="comment?.imageUrl"
+                        src="{{ comment?.imageUrl }}"
+                      />
+                    </div>
+                    <div class="info" style="padding-left: 8%">
+                      <div class="userinfo sl">
+                        <div class="name">{{ comment.username }}</div>
+                        <div class="handle">@{{ comment.username }}</div>
+                      </div>
+                      <i class="material-icons">keyboard_arrow_down</i>
+                    </div>
+                    <div class="replyto sl" style="padding-left: 10%">
+                      Replying to <a>{{ tweet.username }}</a>
+                    </div>
+                    <div class="subtweet-content sl">
+                      {{ comment.comment }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="padding-left: 15%; padding-top: 5%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="column3">
+    <app-home></app-home>
+  </div>
+</div>

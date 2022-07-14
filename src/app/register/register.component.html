@@ -1,0 +1,292 @@
+<!-- Include the above in your HEAD tag -->
+
+<div class="main">
+  <div class="container">
+    <div class="middle text-center" style="width: 75%">
+      <div
+        id="login"
+        class="my-2"
+        style="
+          border-radius: 25px;
+          background-color: black;
+          padding-top: 10%;
+          padding-bottom: 10%;
+          padding-left: 0%;
+          padding-right: 10%;
+        "
+      >
+        <div>
+          <h1
+            style="
+              padding-bottom: 5%;
+              padding-top: 5%;
+              padding-left: 13%;
+              font-family: 'Courier New', Courier, monospace;
+              font-size: 30px;
+              color: rgb(115, 111, 111);
+            "
+          >
+            Create Account
+          </h1>
+        </div>
+        <form
+          class="form-signin"
+          [formGroup]="UserRegister"
+          autocomplete="off"
+          (submit)="onSubmit()"
+        >
+          <fieldset class="clearfix">
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="text"
+                  class="form-control"
+                  formControlName="firstName"
+                  Placeholder="First Name"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('firstName')?.touched &&
+                      UserRegister.get('firstName')?.errors?.required
+                    "
+                  >
+                    First Name is mandatory</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('firstName')?.touched &&
+                      UserRegister.get('firstName')?.errors?.pattern
+                    "
+                    >First Name cannot have special characters or digits</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="text"
+                  class="form-control"
+                  formControlName="lastName"
+                  Placeholder="Last Name"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('lastName')?.touched &&
+                      UserRegister.get('lastName')?.errors?.required
+                    "
+                  >
+                    Last Name is mandatory</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('lastName')?.touched &&
+                      UserRegister.get('lastName')?.errors?.pattern
+                    "
+                    >Last Name cannot have special characters or digits</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="text"
+                  class="form-control"
+                  formControlName="email"
+                  Placeholder="Email Address"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('email')?.touched &&
+                      UserRegister.get('email')?.errors?.required
+                    "
+                  >
+                    Email is mandatory</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('email')?.touched &&
+                      UserRegister.get('email')?.errors?.pattern
+                    "
+                    >Invalid Email Address</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="text"
+                  class="form-control"
+                  formControlName="username"
+                  Placeholder="username"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('username')?.touched &&
+                      UserRegister.get('username')?.errors?.required
+                    "
+                  >
+                    username is mandatory</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('username')?.touched &&
+                      UserRegister.get('username')?.errors?.pattern
+                    "
+                    >Invalid username name</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('username')?.errors
+                        ?.confirmedValidatorEmail
+                    "
+                  >
+                    username does`t match with email
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="password"
+                  class="form-control"
+                  formControlName="password"
+                  Placeholder="Password"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('password')?.touched &&
+                      UserRegister.get('password')?.errors?.required
+                    "
+                  >
+                    Password is mandatory</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('password')?.touched &&
+                      UserRegister.get('password')?.errors?.minlength
+                    "
+                    >Minimun 6 characters required</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="password"
+                  class="form-control"
+                  formControlName="confirmPassword"
+                  Placeholder="Confirm Password"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('confirmPassword')?.touched &&
+                      UserRegister.get('confirmPassword')?.errors?.required
+                    "
+                  >
+                    Confirm Password is mandatory
+                  </small>
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('confirmPassword')?.touched &&
+                      UserRegister.get('confirmPassword')?.errors?.minlength
+                    "
+                    >Minimun 6 characters required</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('confirmPassword')?.errors
+                        ?.confirmedValidator
+                    "
+                  >
+                    Confirm Password does`t match
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10">
+                <input
+                  style="border-radius: 10px; width: 150%"
+                  type="text"
+                  class="form-control"
+                  formControlName="contactNumber"
+                  Placeholder="Contact Number"
+                />
+                <div class="validationMsg">
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('contactNumber')?.touched &&
+                      UserRegister.get('contactNumber')?.errors?.required
+                    "
+                  >
+                    Contact Number is mandatory</small
+                  >
+                  <small
+                    class="text-danger"
+                    *ngIf="
+                      UserRegister.get('contactNumber')?.touched &&
+                      UserRegister.get('contactNumber')?.errors?.pattern
+                    "
+                    >Invalid Contact Number</small
+                  >
+                </div>
+              </div>
+            </div>
+            <div style="color: red; font-size: 14px; text-align: center">
+              {{ message }}
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <button
+                  class="btn btn-md my-2"
+                  [disabled]="!UserRegister.valid"
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 my-2" style="padding-left: 10%">
+                <p style="color: rgb(115, 111, 111)">
+                  Existing user ? <a routerLink="/login">login</a>
+                </p>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

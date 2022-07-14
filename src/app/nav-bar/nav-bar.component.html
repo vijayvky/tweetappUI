@@ -1,0 +1,65 @@
+<div style="margin-top: 25%; margin-left: 40%">
+  <img src="assets/images/twitter.png" />
+</div>
+<div style="margin-top: 30%">
+  <div>
+    <div>
+      <a
+        style="
+          border-radius: 5px;
+          padding: 10px 100px 10px 100px;
+          border: none;
+          font-size: x-large;
+          margin-left: -20%;
+        "
+        class="btn btn-outline-primary"
+        routerLink="/home"
+      >
+        <i class="fa fa-home"></i>&emsp;Home</a
+      >
+    </div>
+    <div style="margin-top: 15%">
+      <a
+        style="
+          border-radius: 5px;
+          padding: 10px 100px 10px 100px;
+          border: none;
+          font-size: x-large;
+          margin-left: -20%;
+        "
+        class="btn btn-outline-primary"
+        routerLink="/profile"
+      >
+        <i class="fa fa-user"></i>&emsp;Profile</a
+      >
+    </div>
+    <div style="margin-top: 15%">
+      <a
+        style="
+          border-radius: 5px;
+          padding: 10px 80px 10px 80px;
+          border: none;
+          font-size: x-large;
+          margin-left: -20%;
+        "
+        class="btn btn-outline-primary"
+        routerLink="/my-tweets"
+      >
+        <img
+          style="width: 30px; height: 30px"
+          src="assets/images/twitter.png"
+        />
+        &emsp;My Tweets</a
+      >
+    </div>
+    <div style="margin-top: 200%">
+      <a
+        style="margin-left: -30%; border: none; font-size: x-large"
+        *ngIf="loginService.isLoggedIn()"
+        class="nav-link pointer btn"
+        (click)="onLogoutClick()"
+        ><span class="fas fa-sign-out-alt"></span> Logout</a
+      >
+    </div>
+  </div>
+</div>

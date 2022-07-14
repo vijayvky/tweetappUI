@@ -1,0 +1,183 @@
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="mobile-web-app-capable" content="yes" />
+<div class="row">
+  <div class="column1" style="align-items: center">
+    <div style="flex: 700%; margin: 50px">
+      <app-nav-bar class="stickySidebar"></app-nav-bar>
+    </div>
+  </div>
+  <div class="column2">
+    <div style="flex: 100%">
+      <div
+        *ngIf="tweetsLength == 0"
+        style="margin: 25%; font-size: 20px; text-align: center"
+      >
+        No tweets to show
+      </div>
+      <div *ngIf="tweetsLength > 0">
+        <div *ngFor="let tweet of othersTweets">
+          <div id="page">
+            <div id="tweet">
+              <div class="tweet-container pt pb pr pl">
+                <div class="user">
+                  <img
+                    class="avatar"
+                    *ngIf="!tweet?.imageUrl"
+                    src="assets/images/user_icon.png"
+                  />
+                  <img
+                    class="avatar"
+                    *ngIf="tweet?.imageUrl"
+                    src="{{ tweet?.imageUrl }}"
+                  />
+                  <div class="username">
+                    <div class="name">{{ tweet.username }}</div>
+                    <div class="handle">@{{ tweet.username }}</div>
+                  </div>
+                  <div class="date pt pb">
+                    {{ tweet.tweetDate | date: "medium" }}
+                  </div>
+                  <i class="material-icons">keyboard_arrow_down</i>
+                </div>
+                <div class="tweet-content pt">
+                  {{ tweet.tweetText }}
+                </div>
+                <div style="margin-left: 20%" id="main-container">
+                  <button
+                    class="btn btn-outline-primary"
+                    style="padding: 2%; font-size: 15px; border: none"
+                    (click)="onEditTweetModal(tweet.tweetId)"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    class="btn btn-outline-primary"
+                    style="
+                      margin-left: 10%;
+                      padding: 2%;
+                      font-size: 15px;
+                      border: none;
+                    "
+                    (click)="deleteTweet(tweet.tweetId)"
+                  >
+                    Delete
+                  </button>
+                  <!-- Edit tweet -->
+                  <div
+                    class="modal fade"
+                    id="editTweetModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="addEmployeeModalLabel"
+                    aria-hidden="true"
+                    style="margin-top: 20%; margin-left: 35%; padding: auto"
+                  >
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-body">
+                          <div style="margin-left: 5%; margin-top: 2%">
+                            <a
+                              type="button"
+                              id="add-employee-form"
+                              class="btn"
+                              data-dismiss="modal"
+                            >
+                              <i style="font-size: 20px" class="fa">&#x2715;</i>
+                            </a>
+                          </div>
+                          <div style="margin: 10%">
+                            <textarea
+                              rows="5"
+                              cols="50"
+                              type="text"
+                              class="form-control"
+                              name="updateTweetText"
+                              [(ngModel)]="updateTweetText"
+                              value="{{ tweet.tweetText }}"
+                              maxlength="144"
+                            ></textarea>
+                            <div style="margin-left: 75%; margin-top: 10%">
+                              <button
+                                style="
+                                  border-radius: 50px;
+                                  padding: 5px 25px 5px 25px;
+                                  font-size: 100%;
+                                "
+                                type="submit"
+                                id="add-employee-form"
+                                class="btn btn-outline-primary"
+                                data-dismiss="modal"
+                                (click)="editTweet()"
+                                [disabled]="updateTweetText === ''"
+                              >
+                                Edit
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end of edit tweet -->
+                </div>
+              </div>
+              <div class="icons">
+                <div class="ico">
+                  <div
+                    (click)="likeTweet(tweet.tweetId)"
+                    class="fa fa-heart number"
+                    style="font-size: 20px"
+                  >
+                    {{ tweet.likesCount }}
+                  </div>
+                </div>
+                <div class="ico">
+                  <div class="far fa-comment number" style="font-size: 20px">
+                    {{ tweet.commentsCount }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="wrap pt">
+              <div *ngIf="tweet.comments.length > 0">
+                <div class="content" *ngFor="let comment of tweet.comments">
+                  <div class="line">
+                    <img
+                      class="avatar"
+                      *ngIf="!comment?.imageUrl"
+                      src="assets/images/user_icon.png"
+                    />
+                    <img
+                      class="avatar"
+                      *ngIf="comment?.imageUrl"
+                      src="{{ comment?.imageUrl }}"
+                    />
+                  </div>
+                  <div class="info" style="padding-left: 8%">
+                    <div class="userinfo sl">
+                      <div class="name">{{ comment.username }}</div>
+                      <div class="handle">@{{ comment.username }}</div>
+                    </div>
+                    <i class="material-icons">keyboard_arrow_down</i>
+                  </div>
+                  <div class="replyto sl" style="padding-left: 10%">
+                    Replying to <a>{{ tweet.username }}</a>
+                  </div>
+                  <div class="subtweet-content sl">
+                    {{ comment.comment }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div style="padding-left: 15%; padding-top: 5%"></div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="column3">
+    <app-home></app-home>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+label {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+p {
+  font-weight: 800;
+}
+
+h3 {
+  font-weight: bolder;
+}
+.profile-img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+}
+/* Create three equal columns that floats next to each other */
+.column1 {
+  float: right;
+  width: 20%;
+  padding: 10px;
+}
+.column2 {
+  float: right;
+  width: 60%;
+  padding: 10px;
+}
+.column3 {
+  float: right;
+  width: 20%;
+  padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* .profile-img:hover {
+  position: relative;
+  border-radius: 0%;
+  top: 25px;
+  left: -35px;
+  width: 300px;
+  height: auto;
+  display: block;
+  z-index: 999;
+} */
+
+.button {
+  background-color: #1da1f2; /* Green */
+  cursor: pointer;
+  position: relative;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 3.75rem;
+  font-weight: 600;
+}
+
+.file-input {
+  display: none;
+}
+
+.btn {
+  background-color: inherit;
+
+  font-size: 16px;
+  cursor: pointer;
+}
+.btn:hover {
+  background: #eee;
+}
+.stickySidebar {
+  position: -webkit-sticky;
+  position: sticky;
+}
+.vl {
+  margin-left: 10%;
+  border: 2px solid rgb(194, 192, 191);
+  height: 100%;
+  width: 80%;
+  border-radius: 20px;
+}

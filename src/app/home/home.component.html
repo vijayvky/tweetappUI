@@ -1,0 +1,40 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+
+<div class="input-group" style="margin: 5% 80% 0% 20%">
+  <div>
+    <input
+      style="
+        margin-left: -40%;
+        padding: 10px 80px 10px 10px;
+        border-radius: 20%;
+      "
+      autocomplete="off"
+      type="search"
+      class="form-control rounded"
+      placeholder="Search"
+      aria-label="Search"
+      aria-describedby="search-addon"
+      name="searchUser"
+      [(ngModel)]="searchUser"
+    />
+  </div>
+  <div>
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      style="
+        margin-left: -100px;
+        padding: 8px 30px 8px 25px;
+        width: 5%;
+        border-color: white;
+        border-radius: 10px;
+      "
+      (click)="search()"
+    >
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+</div>
