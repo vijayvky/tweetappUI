@@ -99,7 +99,6 @@ export class MyTweetsComponent implements OnInit {
   public onEditTweetModal(tempTweetId: string): void {
     this.tweetService.showMyTweetsById(tempTweetId).subscribe((data: any) => {
       data.forEach((element: any) => {
-        console.log(element.tweetText);
         this.updateTweetText = element.tweetText;
       });
     });

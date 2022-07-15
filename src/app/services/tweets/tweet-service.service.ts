@@ -34,7 +34,7 @@ export class TweetServiceService {
   }
 
   public showMyTweetsById(tweetId: string) {
-    return this.http.get(this.baseUrl + `/${tweetId}`);
+    return this.http.get(this.baseUrl + `/byTweetId/${tweetId}`);
   }
 
   public addComment(userName: string, tweetId: string, userComment: any) {
